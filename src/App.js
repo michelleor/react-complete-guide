@@ -1,34 +1,21 @@
 import React, { Component } from 'react';
 import './App.css';
-import Person from './Person/Person';
+import UserOutput from './UserOutput/UserOutput';
+import UserInput from './UserInput/UserInput';
 
 class App extends Component {
 
     state = {
         people: [
-            { name: 'Max', age: 28 },
-            { name: 'Manu', age: 29 },
-            { name: 'Stephanie', age: 26 }
-        ],
-        otherState: 'some other value'
-    };
-
-    switchNameHandler = (newName) => {
-        this.setState({
-            people: [
-                { name: newName, age: 28 },
-                { name: 'Manu', age: 29 },
-                { name: 'Stephanie', age: 27 }
-            ]
-        });
-    };
+            {username: 'Inigo Montoya', quote: 'You killed my father.  Prepare to die!'}
+        ]
+    }
 
     nameChangedHandler = (event) => {
+        console.log('change handler triggered');
         this.setState({
             people: [
-                { name: 'Max', age: 28 },
-                { name: event.target.value, age: 29 },
-                { name: 'Stephanie', age: 27 }
+                {username: event.target.value, quote: 'You killed my father.  Prepare to die!'}
             ]
         });
     };
@@ -36,8 +23,6 @@ class App extends Component {
     render() {
 
         const style = {
-            backgroundColor: 'white',
-            font: 'inherit',
             border: '1px solid blue',
             padding: '8px',
             cursor: 'pointer'
@@ -45,26 +30,15 @@ class App extends Component {
 
         return (
             <div className="App">
-                <h1>Hi, I'm a React App</h1>
-                <p>This is really working!</p>
-                <button
-                    style={style}
-                    onClick={this.switchNameHandler.bind(this, 'Maximilian')}
-                >Switch Name</button>
-                <Person
-                    name={this.state.people[0].name}
-                    age={this.state.people[0].age}/>
-                <Person
-                    name={this.state.people[1].name}
-                    age={this.state.people[1].age}
-                    changed = {this.nameChangedHandler}
-                    click = { () => this.switchNameHandler('Anon') }>
-                    My Hobbies: Racing
-                </Person>
-                <Person
-                    name={this.state.people[2].name}
-                    age={this.state.people[2].age}
-                />
+                <div style={style}>
+                    <UserInput
+                        username={this.state.people[0].username} changed={this.nameChangedHandler}/>
+                </div>
+                <div>
+                    <UserOutput username={this.state.people[0].username} quote={this.state.people[0].quote} />
+                    <UserOutput username="Monkey" quote="Monkey Magic!"/>
+                    <UserOutput username="Fred" quote={'Yabba dabba doooooo!'}/>
+                </div>
             </div>
         );
     }

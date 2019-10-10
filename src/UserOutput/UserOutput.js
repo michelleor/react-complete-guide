@@ -1,10 +1,12 @@
 import React from 'react';
 
+import './UserOutput.css';
+
 const person = (props) => {
     return (
         <div className="UserOutput">
-            <p>I'm {props.name} and I am {props.age} years old</p>
-            <p onClick={props.click}>{props.children}</p>
+            <p>Hi My name is {props.username}</p>
+            <p>{props.quote}</p>
         </div>
     )
 };
